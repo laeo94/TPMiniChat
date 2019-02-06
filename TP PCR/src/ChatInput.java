@@ -11,7 +11,7 @@ public class ChatInput {
 	public ChatInput(InputStream in, ChatProtocol handler) throws IOException{
 		this.in=in;
 		this.handler=handler;
-	}
+	}  
 
 	public void doRun() throws IOException {
 		String strMsg, strName, strTo, strRoom, fName;
