@@ -9,5 +9,5 @@ public interface ChatModelEvents extends ChatEvents, RoomEvents {
 	public void fileSent (String from, String fName,File f);
 	public void sendProposeFile(String to, String fName);
 	public void sendAcceptFile(String to, String fName);
-	public void sendRefuseFile(String to , String fName); 
+	public void sendRefuseFile(String to , String fName);
 }
