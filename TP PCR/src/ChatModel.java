@@ -135,6 +135,6 @@ public class ChatModel {
 		if(existUserName(to) && existUserName(from)) {
 			clientList.get(to).RefuseFileSent(to, fName);
 		}
-	}
+	} 
 	
 }

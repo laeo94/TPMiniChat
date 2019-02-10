@@ -130,7 +130,7 @@ public class ChatInput {
 						}
 					}
 					handler.sendFile(strName, fName, f);
-					break;
+					break; 
 				case"PROPOSE FILE":
 					strName= is.readLine();
 					fName= is.readLine();

@@ -217,7 +217,7 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 		f.delete();
 	}
 	public void fileSent(String from, String fName, File f) {
-		cho.sendFile(from, fName, f);
+		cho.sendFile(from, fName, f); 
 	}
 	
 	@Override
