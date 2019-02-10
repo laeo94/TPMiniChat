@@ -13,6 +13,7 @@ public class ChatOutput implements ChatProtocol{
 
 	public ChatOutput(OutputStream out) throws IOException{
 		this.os=new PrintWriter(out,true);
+		this.oso=out;
 	}
 
 	public synchronized void sendName(String name) {
@@ -139,6 +140,7 @@ public class ChatOutput implements ChatProtocol{
 
 	@Override
 	public synchronized void sendFile(String to, String fName, File f) {
+		System.out.println("aaaa");
 		try (FileInputStream fi = new FileInputStream(f)) {
 			os.println("SEND FILE");
 			os.println(to);
@@ -148,7 +150,7 @@ public class ChatOutput implements ChatProtocol{
 			byte buf[] = new byte[8192];
 			int len = 0;
 			while ((len = fi.read(buf)) != -1) {
-				oso.write(buf, 0, len);
+				oso.write(buf,0, len);
 			}
 		} catch (IOException ex) {
 

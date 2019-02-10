@@ -213,6 +213,7 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 	/*************FILE****************/
 	public void sendFile(String to, String fName, File f) {
 		ChatModel.sendFile(name, to, fName, f);
+		//cho.sendFile(to, fName, f);
 		f.delete();
 	}
 	public void fileSent(String from, String fName, File f) {
@@ -223,17 +224,24 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 	public void sendProposeFile(String to, String fName) {
 		ChatModel.sendProposeFile(name, to, fName);
 	}
+	public void ProposeFileSent(String from, String fName) {
+		cho.sendProposeFile(from, fName);
+	}
 	
 	@Override
 	public void sendAcceptFile(String to, String fName) {
 		ChatModel.sendAcceptFile(name,to,fName);
 	}
-	
+	public void AcceptFileSent(String from, String fName) {
+		cho.sendAcceptFile(from, fName);
+	}
 	@Override
 	public void sendRefuseFile(String to, String fName) {
 		ChatModel.sendRefuseFile(name,to,fName);
 	}
-
+	public void RefuseFileSent(String from, String fName) {
+		cho.sendRefuseFile(from, fName);
+	}
 
 
 }
