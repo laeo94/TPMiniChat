@@ -123,7 +123,7 @@ public class ChatModel {
 		clientList.get(to).fileSent(from, fName, f);
 		}
 	}
-	 
+	
 	public static void sendProposeFile(String from,String to, String fName) {
 		if(existUserName(to) && existUserName(from)) {
 			clientList.get(to).proposeFileSent(from, fName);

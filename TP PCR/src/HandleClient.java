@@ -249,7 +249,7 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 	
 	@Override
 	public void sendAcceptFile(String to, String fName) {
-	 	ChatModel.acceptfile.add(name);
+		ChatModel.acceptfile.add(name);
 		ChatModel.sendAcceptFile(name,to,fName);
 	}
 	public void acceptFileSent(String from, String fName) {
