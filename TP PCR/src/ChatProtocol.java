@@ -22,7 +22,7 @@ public interface ChatProtocol {
 	default void sendAskRoomList(String room) {};
 	default void sendRoomUsersList(String room,Collection <String> ulist) {};
 	default void sendEror(String msg) {};
-	 
+	  
 	default void sendFile(String to, String fName, File f) {};
 	default void sendProposeFile(String to, String fName) {};
 	default void sendAcceptFile(String to, String fName) {};
