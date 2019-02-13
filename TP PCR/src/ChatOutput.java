@@ -24,7 +24,7 @@ public class ChatOutput implements ChatProtocol{
 	public synchronized void sendMessage(String user, String msg) {
 		os.println("MESSAGE");
 		os.println(user);
-		os.println(msg);
+		os.println(msg); 
 	}
 
 	public synchronized void sendPrivateMessage(String from, String to, String msg) {
