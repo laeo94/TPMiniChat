@@ -213,27 +213,10 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 
 
 	/*************FILE****************/
-	//private TreeMap <String,File> sendfile = new TreeMap <String,File> ();
-	//private ArrayList <String> acceptfile = new ArrayList <String>();
+
 	public void sendFile(String to, String fName, File f) {
-		//sendfile.put(to,f);
-		sendProposeFile(to,fName);
-		try {
-			Thread.sleep(10000);
-			if(ChatModel.acceptfile.contains(to)) {		
-				ChatModel.sendFile(name, to, fName, f);
-			}else {
-			cho.sendEror("Temps d'attente dépasé");
-			}
-			ChatModel.acceptfile.remove(to);
-			ChatModel.sendfile.remove(name);
-		    f.delete();
-				
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		ChatModel.sendFile(name, to, fName, f);
+		f.delete();
 	}
 	public void fileSent(String from, String fName, File f) {
 		cho.sendFile(from, fName, f); 
@@ -249,13 +232,9 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 	
 	@Override
 	public void sendAcceptFile(String to, String fName) {
-		ChatModel.acceptfile.add(name);
 		ChatModel.sendAcceptFile(name,to,fName);
 	}
 	public void acceptFileSent(String from, String fName) {
-		if(ChatModel.sendfile.containsKey(name)) {
-			ChatModel.sendFile(from,name, fName,ChatModel.sendfile.get(fName));
-		}
 		cho.sendAcceptFile(from, fName);
 	}
 	@Override
