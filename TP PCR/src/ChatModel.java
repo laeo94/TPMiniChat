@@ -20,7 +20,7 @@ public class ChatModel {
 	}
 	public static synchronized void unregisterUser(String name) {
 		if (existUserName(name)) {
-			clientList.remove(name);
+			clientList.remove(name); 
 			notifyNewName();
 		}
 	}
