@@ -7,7 +7,7 @@ public interface ChatModelEvents extends ChatEvents, RoomEvents {
 	public void shutdownRequested();
 	public void roomListChanged();
 	public void fileSent (String from, String fName,File f);
-	public void ProposeFileSent(String to, String fName);
-	public void AcceptFileSent(String to, String fName);
-	public void RefuseFileSent(String to , String fName);
+	public void proposeFileSent(String to, String fName);
+	public void acceptFileSent(String to, String fName);
+	public void refuseFileSent(String to , String fName);
 } 

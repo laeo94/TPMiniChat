@@ -1,7 +1,9 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeMap;
 
 public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 	private final Socket s;
@@ -89,7 +91,7 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 
 	@Override
 	public void sendQuit() {
-		stop=true;
+		finish();
 		cho.sendQuit();
 	}
 
@@ -211,10 +213,27 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 
 
 	/*************FILE****************/
+	//private TreeMap <String,File> sendfile = new TreeMap <String,File> ();
+	//private ArrayList <String> acceptfile = new ArrayList <String>();
 	public void sendFile(String to, String fName, File f) {
-		ChatModel.sendFile(name, to, fName, f);
-		//cho.sendFile(to, fName, f);
-		f.delete();
+		//sendfile.put(to,f);
+		sendProposeFile(to,fName);
+		try {
+			Thread.sleep(10000);
+			if(ChatModel.acceptfile.contains(to)) {		
+				ChatModel.sendFile(name, to, fName, f);
+			}else {
+			cho.sendEror("Temps d'attente dépasé");
+			}
+			ChatModel.acceptfile.remove(to);
+			ChatModel.sendfile.remove(name);
+		    f.delete();
+				
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	public void fileSent(String from, String fName, File f) {
 		cho.sendFile(from, fName, f); 
@@ -224,22 +243,26 @@ public class HandleClient implements Runnable, ChatProtocol, ChatModelEvents{
 	public void sendProposeFile(String to, String fName) {
 		ChatModel.sendProposeFile(name, to, fName);
 	}
-	public void ProposeFileSent(String from, String fName) {
+	public void proposeFileSent(String from, String fName) {
 		cho.sendProposeFile(from, fName);
 	}
 	
 	@Override
 	public void sendAcceptFile(String to, String fName) {
+		ChatModel.acceptfile.add(name);
 		ChatModel.sendAcceptFile(name,to,fName);
 	}
-	public void AcceptFileSent(String from, String fName) {
+	public void acceptFileSent(String from, String fName) {
+		if(ChatModel.sendfile.containsKey(name)) {
+			ChatModel.sendFile(from,name, fName,ChatModel.sendfile.get(fName));
+		}
 		cho.sendAcceptFile(from, fName);
 	}
 	@Override
 	public void sendRefuseFile(String to, String fName) {
 		ChatModel.sendRefuseFile(name,to,fName);
 	}
-	public void RefuseFileSent(String from, String fName) {
+	public void refuseFileSent(String from, String fName) {
 		cho.sendRefuseFile(from, fName);
 	}
 

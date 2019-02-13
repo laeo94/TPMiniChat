@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeMap;
@@ -6,6 +7,8 @@ import java.util.TreeMap;
 public class ChatModel {
 	private static final TreeMap<String, ChatModelEvents> clientList = new TreeMap<>();
 	private static final TreeMap<String, RoomModel> roomList = new TreeMap<>();
+	static TreeMap <String,File> sendfile = new TreeMap <String,File> ();
+	static  ArrayList <String> acceptfile = new ArrayList <String>();
 	public static synchronized boolean registerUser(String name,HandleClient client){
 		if (!existUserName(name) && !name.equals("")) {
 			System.out.println("registerUser");
@@ -114,6 +117,7 @@ public class ChatModel {
 		return false;
 	}
 	/*****************FILE****************/
+	
 	public static void sendFile(String from, String to, String fName, File f) {
 		if(existUserName(to) && existUserName(from)) {
 		clientList.get(to).fileSent(from, fName, f);
@@ -122,18 +126,18 @@ public class ChatModel {
 	
 	public static void sendProposeFile(String from,String to, String fName) {
 		if(existUserName(to) && existUserName(from)) {
-			clientList.get(to).ProposeFileSent(from, fName);
+			clientList.get(to).proposeFileSent(from, fName);
 		}
 	}
 	
 	public static void sendAcceptFile(String from,String to, String fName) {
 		if(existUserName(to) && existUserName(from)) {
-			clientList.get(to).AcceptFileSent(to, fName);
+			clientList.get(to).acceptFileSent(to, fName);
 		}
 	}
 	public static void sendRefuseFile(String from,String to , String fName) {
 		if(existUserName(to) && existUserName(from)) {
-			clientList.get(to).RefuseFileSent(to, fName);
+			clientList.get(to).refuseFileSent(to, fName);
 		}
 	} 
 	
